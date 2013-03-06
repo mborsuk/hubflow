@@ -228,6 +228,10 @@ cmd_start() {
 	echo
 }
 
+cmd_submit() {
+
+}
+
 cmd_finish() {
 	DEFINE_boolean fetch true "fetch from $ORIGIN before performing finish" F
 	DEFINE_boolean sign false "sign the release tag cryptographically" s
