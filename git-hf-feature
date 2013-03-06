@@ -239,6 +239,7 @@ cmd_start() {
 }
 
 cmd_submit() {
+	DEFINE_boolean rebase true 'don\'t rebase on $ORIGIN/develop before submitting pull-request' r
 	parse_args "$@"
     BASE=${2:-$DEVELOP_BRANCH}
 	name_or_current
@@ -250,8 +251,22 @@ cmd_submit() {
 	require_remote_available
 	hubflow_fetch_latest_changes_from_origin
 
+	# rebase on $ORIGIN/develop
+	if flag rebase; then
+		force="force"
+		if ! git hf feature rebase; then
+			warn "Submit was aborted due to conflicts during rebase."
+			warn "Please finish the rebase manually now."
+			warn "When finished, re-run:"
+			warn "    git hf feature submit '$NAME'"
+			warn "If you would like submit feature without rebasing, run:"
+			warn "    git rebase --abort && git hf feature submit -r"
+			exit 1
+		fi
+	fi
+
 	# push to origin
-	hubflow_push_latest_changes_to_origin
+	hubflow_push_latest_changes_to_origin "${force}"
 
 	# pull request details
 	PR_FILE="./COMMIT_MSG"
