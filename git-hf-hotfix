@@ -210,13 +210,9 @@ cmd_start() {
 	# create branch
 	git checkout -b "$BRANCH" "$BASE"
 
-	# push it back up to remote repo
-	hubflow_push_latest_changes_to_origin
-
 	echo
 	echo "Summary of actions:"
 	echo "- A new branch '$BRANCH' was created, based on '$BASE'"
-	echo "- The branch '$BRANCH' has been pushed up to '$ORIGIN/$BRANCH'"
 	echo "- You are now on branch '$BRANCH'"
 	echo
 	echo "Follow-up actions:"
