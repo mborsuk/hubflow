@@ -424,25 +424,6 @@ hubflow_push_latest_changes_to_origin() {
     return 0
 }
 
-hubflow_get_latest_version_number() {
-	LATEST="`git ls-remote --tags https://github.com/datasift/gitflow | grep -v '\^' | tail -n 1 | cut -d / -f 3`"
-
-	echo $LATEST
-}
-
-hubflow_has_new_version_available() {
-	LATEST=`hubflow_get_latest_version_number`
-	if [[ $LATEST != $HUBFLOW_VERSION ]] ; then
-		echo "A new version of the HubFlow tools is available."
-		echo "To upgrade, run 'git hf upgrade'."
-		echo
-		return 0
-	fi
-
-	# no new version available
-	return 1
-}
-
 #
 # hubflow_resolve_nameprefix
 #

@@ -46,11 +46,7 @@ usage() {
 }
 
 cmd_default() {
-	if hubflow_has_new_version_available > /dev/null ; then
-		echo "$HUBFLOW_VERSION - upgrade available"
-	else
-		echo "$HUBFLOW_VERSION - latest version"
-	fi
+	"$HUBFLOW_VERSION"
 }
 
 cmd_help() {

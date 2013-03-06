@@ -17,7 +17,7 @@ if [ -z "$REPO_NAME" ] ; then
 fi
 
 if [ -z "$REPO_HOME" ] ; then
-	REPO_HOME="http://github.com/datasift/gitflow.git"
+	REPO_HOME="http://github.com/mborsuk/hubflow.git"
 fi
 
 EXEC_FILES="git-hf"
