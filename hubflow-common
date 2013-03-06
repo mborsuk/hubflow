@@ -44,8 +44,7 @@
 # Common variables
 #
 
-HUBFLOW_VERSION=1.5.0
-HUBFLOW_REPO=https://github.com/datasift/gitflow
+HUBFLOW_VERSION="XXXHFVERSIONXXX"
 
 #
 # Common functionality

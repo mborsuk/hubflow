@@ -26,4 +26,11 @@ check_write_access() {
 if [ -z "$INSTALL_PREFIX" ]; then INSTALL_PREFIX="/usr/local/bin"; fi
 check_write_access || exit 1
 export REPO_NAME="`dirname $0`"
+
+GIT_VERSION=$(git describe --always --long origin/develop)
+cp hubflow-common hubflow-common.bak
+sed -i "s/XXXHFVERSIONXXX/${GIT_VERSION}/g" hubflow-common || echo "Error writing version string"
+
 bash $REPO_NAME/contrib/gitflow-installer.sh "$@"
+
+mv hubflow-common.bak hubflow-common
