@@ -262,8 +262,8 @@ cmd_default() {
 
 	# finally, ask the user for naming conventions (branch and tag prefixes)
 	if flag force || \
-	   ! git config --get hubflow.prefix.feature >/dev/null 2>&1 ||
-	   ! git config --get hubflow.prefix.hotfix >/dev/null 2>&1 ||
+	   ! git config --get hubflow.prefix.feature >/dev/null 2>&1 || \
+	   ! git config --get hubflow.prefix.hotfix >/dev/null 2>&1; then
 		echo
 		echo "How to name your supporting branch prefixes?"
 	fi
