@@ -47,12 +47,13 @@ PREFIX=$(git config --get hubflow.prefix.hotfix)
 
 usage() {
 	echo "usage: git hf hotfix [list] [-v]"
-	echo "       git hf hotfix start <version> [<base>]"
-	echo "       git hf hotfix finish [-sumpk] <version>"
+	echo "       git hf hotfix start <hotfix-name> [<base>]"
+	echo "       git hf hotfix finish [-sumpk] <hotfix-name>"
+	echo "       git hf hotfix submit [-r] [<name>] [<base>]"
 	echo "       git hf hotfix track <name>"
-	echo "       git hf hotfix pull [-r] [<remote> [<version>]]"
-	echo "       git hf hotfix push [<remote> [<version>]]"
-	echo "       git hf hotfix cancel [-f] <version>"
+	echo "       git hf hotfix pull [-r] [<remote> [<hotfix-name>]]"
+	echo "       git hf hotfix push [<remote> [<hotfix-name>]]"
+	echo "       git hf hotfix cancel [-f] <hotfix-name>"
 }
 
 cmd_default() {
@@ -72,7 +73,7 @@ cmd_list() {
                 warn ""
                 warn "You can start a new hotfix branch:"
                 warn ""
-                warn "    git hf hotfix start <version> [<base>]"
+                warn "    git hf hotfix start <hotfix-name> [<base>]"
                 warn ""
 		exit 0
 	fi
@@ -154,7 +155,7 @@ parse_remote_name() {
 
 require_version_arg() {
 	if [ "$VERSION" == "" ]; then
-		warn "Missing argument <version>"
+		warn "Missing argument <hotfix-name>"
 		usage
 		exit 1
 	fi
@@ -220,11 +221,11 @@ cmd_start() {
 	echo "- You are now on branch '$BRANCH'"
 	echo
 	echo "Follow-up actions:"
-	echo "- Bump the version number now!"
+	echo "- Bump the version number now if applicable"
 	echo "- Start committing your hot fixes"
 	echo "- When done, run:"
 	echo
-	echo "     git hf hotfix finish '$VERSION'"
+	echo "     git hf hotfix submit '$VERSION'"
 	echo
 }
 
