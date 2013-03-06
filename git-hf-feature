@@ -232,9 +232,9 @@ cmd_start() {
 	echo "- You are now on branch '$BRANCH'"
 	echo ""
 	echo "Now, start committing on your feature. When done, create a"
-	echo "pull request on GitHub.  Once that has been merged, use:"
+	echo "pull request on GitHub with: "
 	echo ""
-	echo "     git hf feature finish $NAME"
+	echo "     git hf feature submit $NAME"
 	echo
 }
 
@@ -335,7 +335,7 @@ EOS
 	echo "- The branch '$BRANCH' was pushed to '$ORIGIN'"
 	echo "- A Pull Request from '$BRANCH' to '$BASE' was created at '$PR_URL'"
 	echo ""
-	echo "Once the Pull Request has been accepted, cleanup the feature with:"
+	echo "Once the Pull Request has been accepted & merged, cleanup the feature with:"
 	echo ""
 	echo "     git hf feature finish $NAME"
 	echo
