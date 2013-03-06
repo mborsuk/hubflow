@@ -202,7 +202,6 @@ cmd_start() {
 		hubflow_fetch_latest_changes_from_origin
 	fi
 	require_base_is_on_master
-	require_no_existing_hotfix_branches
 	require_branch_absent "$BRANCH"
 	if has "$ORIGIN/$MASTER_BRANCH" $(git_remote_branches); then
 		require_branches_equal "$MASTER_BRANCH" "$ORIGIN/$MASTER_BRANCH"
