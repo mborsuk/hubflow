@@ -265,7 +265,6 @@ cmd_default() {
 	   ! git config --get hubflow.prefix.feature >/dev/null 2>&1 ||
 	   ! git config --get hubflow.prefix.release >/dev/null 2>&1 ||
 	   ! git config --get hubflow.prefix.hotfix >/dev/null 2>&1 ||
-	   ! git config --get hubflow.prefix.support >/dev/null 2>&1 ||
 	   ! git config --get hubflow.prefix.versiontag >/dev/null 2>&1; then
 		echo
 		echo "How to name your supporting branch prefixes?"
@@ -311,20 +310,6 @@ cmd_default() {
 		fi
 		[ "$answer" = "-" ] && prefix= || prefix=${answer:-$default_suggestion}
 		git config hubflow.prefix.hotfix "$prefix"
-	fi
-
-
-	# Support branches
-	if ! git config --get hubflow.prefix.support >/dev/null 2>&1 || flag force; then
-		default_suggestion=$(git config --get hubflow.prefix.support || echo support/)
-		printf "Support branches? [$default_suggestion] "
-		if flag ask; then
-			read answer
-		else
-			printf "\n"
-		fi
-		[ "$answer" = "-" ] && prefix= || prefix=${answer:-$default_suggestion}
-		git config hubflow.prefix.support "$prefix"
 	fi
 
 

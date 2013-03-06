@@ -187,7 +187,6 @@ hubflow_has_prefixes_configured() {
 	git config --get hubflow.prefix.feature >/dev/null 2>&1     && \
 	git config --get hubflow.prefix.release >/dev/null 2>&1     && \
 	git config --get hubflow.prefix.hotfix >/dev/null 2>&1      && \
-	git config --get hubflow.prefix.support >/dev/null 2>&1     && \
 	git config --get hubflow.prefix.versiontag >/dev/null 2>&1
 }
 
