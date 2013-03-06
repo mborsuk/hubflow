@@ -46,7 +46,7 @@ usage() {
 }
 
 cmd_default() {
-	"$HUBFLOW_VERSION"
+	echo "$HUBFLOW_VERSION"
 }
 
 cmd_help() {
