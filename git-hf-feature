@@ -48,15 +48,15 @@ PREFIX=$(git config --get hubflow.prefix.feature)
 usage() {
 	echo "usage: git hf feature [list] [-v]"
 	echo "       git hf feature start <name> [<base>]"
-	echo "       git hf feature submit [<name>] [<base>]"
-	echo "       git hf feature finish [-rFkD] [<name|nameprefix>]"
+	echo "       git hf feature submit [-r] [<name>] [<base>]"
+	echo "       git hf feature finish [-FkD] [<name|nameprefix>]"
 	echo "       git hf feature track <name>"
 	echo "       git hf feature diff [<name|nameprefix>]"
 	echo "       git hf feature rebase [-i] [<name|nameprefix>]"
 	echo "       git hf feature checkout [<name|nameprefix>]"
 	echo "       git hf feature pull [-r] [<remote> [<name>]]"
-	echo "       git hf feature push [<remote> [<name>]]"
-	echo "       git hf feature cancel [-f] <name>"
+	echo "       git hf feature push [-f] [<remote> [<name>]]"
+	echo "       git hf feature cancel [-Ffpk] <name>"
 }
 
 cmd_default() {
@@ -253,7 +253,7 @@ cmd_submit() {
 
 	# rebase on $ORIGIN/develop
 	if flag rebase; then
-		force="force"
+		local force="force"
 		if ! git hf feature rebase; then
 			warn "Submit was aborted due to conflicts during rebase."
 			warn "Please finish the rebase manually now."
@@ -471,7 +471,12 @@ cmd_pull() {
 }
 
 cmd_push() {
-	git hf push "$@"
+	DEFINE_boolean force false "force push '$BRANCH' to '$ORIGIN/$BRANCH'" f
+	if flag force; then
+		git hf push force "$@"
+	else
+		git hf push "$@"
+	fi
 }
 
 cmd_cancel() {

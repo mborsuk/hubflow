@@ -45,7 +45,7 @@ require_hubflow_initialized
 hubflow_load_settings
 
 usage() {
-    echo "usage: git hf push [-f]"
+    echo "usage: git hf push"
 }
 
 cmd_default() {
@@ -63,8 +63,9 @@ parse_args() {
     eval set -- "${FLAGS_ARGV}"
 }
 
+# $1: 'force' if push should overwrite existing origin contents
 cmd_push() {
-    DEFINE_boolean force false "Forces a destructive push using the --force/-f flag" F
+    local force="$1"; shift
     parse_args "$@"
 
     # make sure we're okay to start
@@ -75,7 +76,7 @@ cmd_push() {
     hubflow_remote_merge_helper "$ORIGIN" "$BRANCH"
 
     # push to origin
-    if flag force ; then
+    if [[ "$force" == "force" ]] ; then
         hubflow_push_latest_changes_to_origin force
     else
         hubflow_push_latest_changes_to_origin
