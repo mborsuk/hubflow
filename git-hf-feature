@@ -227,9 +227,12 @@ cmd_start() {
 	echo "- A new branch '$BRANCH' was created, based on '$BASE'"
 	echo "- You are now on branch '$BRANCH'"
 	echo ""
-	echo "Now, start committing on your feature. When done, create a"
-	echo "pull request on GitHub with: "
+	echo "Now, start committing on your feature; update and push changes periodically with: "
+	echo "		git hf feature rebase "
+	echo " and "
+	echo "		git hf feature push"
 	echo ""
+	echo "When done, submit a pull request on GitHub with: "
 	echo "     git hf feature submit $NAME"
 	echo
 }
@@ -467,8 +470,8 @@ cmd_pull() {
 }
 
 cmd_push() {
-	DEFINE_boolean force false "force push '$BRANCH' to '$ORIGIN/$BRANCH'" f
-	if flag force; then
+	DEFINE_boolean noforce false "don't force push '$BRANCH' to '$ORIGIN/$BRANCH'" F
+	if noflag noforce; then
 		git hf push force "$@"
 	else
 		git hf push "$@"
