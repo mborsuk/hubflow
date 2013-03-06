@@ -21,7 +21,7 @@ if [ -z "$REPO_HOME" ] ; then
 fi
 
 EXEC_FILES="git-hf"
-SCRIPT_FILES="git-hf-init git-hf-feature git-hf-hotfix git-hf-push git-hf-pull git-hf-release git-hf-update git-hf-version hubflow-common gitflow-shFlags"
+SCRIPT_FILES="git-hf-init git-hf-feature git-hf-hotfix git-hf-push git-hf-pull git-hf-update git-hf-version hubflow-common gitflow-shFlags"
 SUBMODULE_FILE="gitflow-shFlags"
 
 echo "### gitflow / hubflow no-make installer ###"

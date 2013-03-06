@@ -263,9 +263,7 @@ cmd_default() {
 	# finally, ask the user for naming conventions (branch and tag prefixes)
 	if flag force || \
 	   ! git config --get hubflow.prefix.feature >/dev/null 2>&1 ||
-	   ! git config --get hubflow.prefix.release >/dev/null 2>&1 ||
 	   ! git config --get hubflow.prefix.hotfix >/dev/null 2>&1 ||
-	   ! git config --get hubflow.prefix.versiontag >/dev/null 2>&1; then
 		echo
 		echo "How to name your supporting branch prefixes?"
 	fi
@@ -285,20 +283,6 @@ cmd_default() {
 		git config hubflow.prefix.feature "$prefix"
 	fi
 
-	# Release branches
-	if ! git config --get hubflow.prefix.release >/dev/null 2>&1 || flag force; then
-		default_suggestion=$(git config --get hubflow.prefix.release || echo release/)
-		printf "Release branches? [$default_suggestion] "
-		if flag ask; then
-			read answer
-		else
-			printf "\n"
-		fi
-		[ "$answer" = "-" ] && prefix= || prefix=${answer:-$default_suggestion}
-		git config hubflow.prefix.release "$prefix"
-	fi
-
-
 	# Hotfix branches
 	if ! git config --get hubflow.prefix.hotfix >/dev/null 2>&1 || flag force; then
 		default_suggestion=$(git config --get hubflow.prefix.hotfix || echo hotfix/)
@@ -310,20 +294,6 @@ cmd_default() {
 		fi
 		[ "$answer" = "-" ] && prefix= || prefix=${answer:-$default_suggestion}
 		git config hubflow.prefix.hotfix "$prefix"
-	fi
-
-
-	# Version tag prefix
-	if ! git config --get hubflow.prefix.versiontag >/dev/null 2>&1 || flag force; then
-		default_suggestion=$(git config --get hubflow.prefix.versiontag || echo "")
-		printf "Version tag prefix? [$default_suggestion] "
-		if flag ask; then
-			read answer
-		else
-			printf "\n"
-		fi
-		[ "$answer" = "-" ] && prefix= || prefix=${answer:-$default_suggestion}
-		git config hubflow.prefix.versiontag "$prefix"
 	fi
 
 

@@ -43,7 +43,6 @@
 require_git_repo
 require_hubflow_initialized
 hubflow_load_settings
-VERSION_PREFIX=$(eval "echo `git config --get hubflow.prefix.versiontag`")
 PREFIX=$(git config --get hubflow.prefix.hotfix)
 
 usage() {
@@ -204,7 +203,6 @@ cmd_start() {
 	require_base_is_on_master
 	require_no_existing_hotfix_branches
 	require_branch_absent "$BRANCH"
-	require_tag_absent "$VERSION_PREFIX$VERSION"
 	if has "$ORIGIN/$MASTER_BRANCH" $(git_remote_branches); then
 		require_branches_equal "$MASTER_BRANCH" "$ORIGIN/$MASTER_BRANCH"
 	fi

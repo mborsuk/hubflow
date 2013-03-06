@@ -59,7 +59,6 @@ usage() {
 	echo "Available subcommands are:"
 	echo "   init      Initialize a new git repo with support for the branching model."
 	echo "   feature   Manage your feature branches."
-	echo "   release   Manage your release branches."
 	echo "   hotfix    Manage your hotfix branches."
 	echo "   push      Push the changes from your current branch (plus any new tags) back upstream."
 	echo "   pull      Pull upstream changes down into your master, develop, and current branches."
